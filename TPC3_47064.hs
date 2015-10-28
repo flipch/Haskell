@@ -10,10 +10,9 @@ maiorOrdenado' ((_,_,_,x,_):xs)
                   | x >= maiorOrdenado' xs = x
                   | otherwise = maiorOrdenado' xs
 
-maiorDepartamento xs = maiorDepartamento' (map (\(x,a,y,b,c) -> (x,y)) xs)
+maiorDepartamento xs = map (\(x,a,y,b,c) -> (x,y))
+                          (maiorNumero [(count c xs, c) | c <- rmdups xs])
 
-maiorDepartamento' xs
-                    = maiorNumero [(count c xs, c) | c <- rmdups xs]
 
 maiorNumero a@((y,x):xs)
                 | y == b = x
@@ -24,6 +23,15 @@ maiorNumero' [] = 0
 maiorNumero' ((x,_):xs)
                 | x >= maiorNumero' xs = x
                 | otherwise = maiorNumero' xs
+
+ordenadoMedio xs = ordenadoMedio' ys
+            where ys = map (\(x,a,y,b,c) -> (y,b))
+
+ordenadoMedio' xs = [ (x, sumOrds x xs `quot`count x xs) | x <- rmdups xs]
+
+sumOrds x [] = []
+sumOrds x (y:ys) | fst y == x = snd y + sumOrds x ys
+                 | otherwise = sumOrds  ys
 
 count x [] = 0
 count x ((_,y):ys)
