@@ -9,17 +9,8 @@ main = do
    let txt = head args
    handle <- openFile txt ReadMode
    contents <- hGetContents handle
-   let dados = lines contents
-   let marcados = removeNormais dados
-   let list = removeMarcas dados
-  --putStrLn $ "Dados lidos do ficheiro: " ++ contents
-  --putStrLn $ "Lista em Array: " ++ show dados
-  --putStrLn $ "Lista total: " ++ show list
-  --putStrLn $ "Lista marcados: " ++show marcados
-   let lista = foldr adicionar vazia list
-  -- putStrLn $ "Lista de Favoritos desmarcada: " ++ show lista
-   let lista_marcada = marcarLista marcados lista
-   --putStrLn $ "Lista de Favoritos marcada: " ++ show lista_marcada
+   let lista_marcada = marcarLista (removeNormais (lines contents))
+            (foldr adicionar vazia (removeMarcas (lines contents)))
    print $ extrair lista_marcada
    return ()
 
