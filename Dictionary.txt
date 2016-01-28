@@ -1,0 +1,6 @@
+Chave: Carro
+Value: Veiculo Motorizado de 4 rodas
+Chave: Surf
+Value: Desporto Aquatico
+Chave: Youtube
+Value: Plataforma da Google de partilha de videos
